@@ -26,7 +26,7 @@ function handleSubmit(e) {
   e.preventDefalt();
   const delayEl = Number(inputDeyal.value);
   const stepEl = Number(inputStep.value);
-  const amountEl = Number(inputStep.value);
+  const amountEl = Number(inputAmout.value);
 
   let firstDelay = delayEl;
 
