@@ -2,7 +2,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
-const flatpickr = require('flatpickr');
+
 const input = document.querySelector('#datetime-picker');
 const timeVolue = document.querySelector('.value')
 const startButton = document.querySelector('button[data-start]');
@@ -18,9 +18,10 @@ function addLeadingZero(value) {
 }
 
 startButton.disabled = true;
-const options = {
+const calendar = flatpickr('input#datetime-picker',{
   enableTime: true,
   time_24hr: true,
+  dateFormat: 'd-m-Y H:i',
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
@@ -32,7 +33,7 @@ const options = {
     }
     console.log(selectedDates[0]);
   },
-};
+});
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
@@ -55,7 +56,7 @@ function convertMs(ms) {
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-flatpickr('#datetime-picker', options);
+//flatpickr('#datetime-picker', options);
 
 startButton.addEventListener('click', onClick);
 function onClick() {
