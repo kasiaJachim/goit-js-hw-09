@@ -56,7 +56,7 @@ console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20
 
 startButton.addEventListener('click', onClick);
 function onClick() {
-  intervalId = setInterval(() => {
+  const intervalId = setInterval(() => {
    let currentTime = Date.now();
    let ms = calendar.latestSelectedDateObj  - currentTime;
     let time = convertMs(ms);
