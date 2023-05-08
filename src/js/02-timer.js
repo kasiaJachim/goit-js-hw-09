@@ -12,12 +12,6 @@ const valuesMinutes = document.querySelector('span[data-minutes]');
 const valuesSeconds = document.querySelector('span[data-seconds]');
 const label = document.querySelector('.label');
 
-
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
-}
-
-startButton.disabled = true;
 const calendar = flatpickr('input#datetime-picker',{
   enableTime: true,
   time_24hr: true,
@@ -25,13 +19,12 @@ const calendar = flatpickr('input#datetime-picker',{
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    setDate = selectedDates[0];
     if (selectedDates[0] < new Date()) {
       Notiflix.Notify.warning('Please choose a date in the future');
     } else {
       startButton.disabled = false;
     }
-    console.log(selectedDates[0]);
+  //  console.log(selectedDates[0]);
   },
 });
 function convertMs(ms) {
@@ -52,22 +45,25 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-//flatpickr('#datetime-picker', options);
+
 
 startButton.addEventListener('click', onClick);
 function onClick() {
   intervalId = setInterval(() => {
     currentTime = Date.now();
-    ms = setDate - currentTime;
+    ms = calendar.latestSelectedDateObj  - currentTime;
     let time = convertMs(ms);
-    valueDays.textContent = time.days;
-    valueHours.textContent = time.hours;
-    valuesMinutes.textContent = time.minutes;
-    valuesSeconds.textContent = time.seconds;
+    valueDays.textContent = addLeadingZero(time.days);
+    valueHours.textContent = addLeadingZero(time.hours);
+    valuesMinutes.textContent = addLeadingZero(time.minutes);
+    valuesSeconds.textContent = addLeadingZero(time.seconds);
     if (ms < 1000) {
       clearInterval(intervalId);
     }
