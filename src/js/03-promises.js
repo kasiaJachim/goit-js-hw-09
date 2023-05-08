@@ -24,14 +24,14 @@ function createPromise(position, delay) {
 }
 function handleSubmit(e) {
   e.preventDefalt();
-  const delayEl = Number(inputDeyal.value);
+  const firstDelay = Number(inputDeyal.value);
   const stepEl = Number(inputStep.value);
   const amountEl = Number(inputAmout.value);
 
-  let firstDelay = delayEl;
+  let delayEl = firstDelay;
 
   for (let i = 1; i <= amountEl; i += 1) {
-    createPromise(i, firstDelay)
+    createPromise(i, delayEl)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -40,6 +40,6 @@ function handleSubmit(e) {
         Notiflix.Notify.failure(
           `❌ Rejected promise ${position} in ${delay}ms`,);
       });
-    firstDelay = delayEl + i * stepEl;
+    delayEl = firstDelay + i * stepEl;
   }
 }
