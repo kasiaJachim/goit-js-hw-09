@@ -23,7 +23,7 @@ function createPromise(position, delay) {
   });
 }
 function handleSubmit(e) {
-  e.preventDefalt();
+  e.preventDefault();
   const firstDelay = Number(inputDeyal.value);
   const stepEl = Number(inputStep.value);
   const amountEl = Number(inputAmout.value);
